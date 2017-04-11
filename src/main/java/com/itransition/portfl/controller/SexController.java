@@ -24,12 +24,11 @@ public class SexController {
 
     @GetMapping(value = "/getall")
     public ResponseEntity<?> findAll() {
-        System.out.println(sexService.findAll());
         return ResponseEntity.ok(sexService.findAll());
     }
 
     @GetMapping(value = "/get")
-    public ResponseEntity<?> findOneSexById(@RequestParam int id) {
+    public ResponseEntity<?> findOneById(@RequestParam int id) {
         return ResponseEntity.ok(sexService.findById(id));
     }
 
@@ -40,9 +39,9 @@ public class SexController {
     }
 
     @PostMapping(value = "/delete")
-    public ResponseEntity<String> deleteSexById(@RequestParam int id) {
+    public ResponseEntity<?> deleteSexById(@RequestParam int id) {
         sexService.delete(id);
-        return new ResponseEntity("good", HttpStatus.CREATED);
+        return ResponseEntity.ok("ok");
     }
 
     public Sex toSex(SexDTO sexDTO){
