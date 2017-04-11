@@ -1,10 +1,14 @@
 package com.itransition.portfl.service;
 
-import org.springframework.stereotype.Service;
+import com.itransition.portfl.model.Comment;
+
+import java.util.List;
 
 /**
- * Created by Artur on 10.04.2017.
+ * @author Kulik Artur
  */
-@Service
 public interface CommentService {
+    List<Comment> findAllByImageId(Integer id);
+    void save(Comment comment);
+    void delete(Integer id);
 }

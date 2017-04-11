@@ -5,11 +5,11 @@ import com.itransition.portfl.model.Sex;
 import java.util.List;
 
 /**
- * Created by Artur on 10.04.2017.
+ * @author Kulik Artur
  */
 public interface SexService {
     List<Sex> findAll();
-    Sex findOneSexById(Integer id);
+    Sex findById(Integer id);
     void save(Sex post);
-    void deleteSexById(Integer id);
+    void delete(Integer id);
 }

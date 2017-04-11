@@ -1,12 +1,18 @@
 package com.itransition.portfl.repository;
 
+import com.itransition.portfl.model.Sex;
 import com.itransition.portfl.model.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by Artur on 09.04.2017.
+ * @author Kulik Artur
  */
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Integer> {
+
+    @Query(value = "SELECT p FROM User p WHERE p.id = ?1")
+    Sex findOneUserById(Integer id);
+
 }

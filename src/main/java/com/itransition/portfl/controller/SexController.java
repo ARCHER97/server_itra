@@ -30,7 +30,7 @@ public class SexController {
 
     @GetMapping(value = "/get")
     public ResponseEntity<?> findOneSexById(@RequestParam int id) {
-        return ResponseEntity.ok(sexService.findOneSexById(id));
+        return ResponseEntity.ok(sexService.findById(id));
     }
 
     @PostMapping(value = "/save")
@@ -41,7 +41,7 @@ public class SexController {
 
     @PostMapping(value = "/delete")
     public ResponseEntity<String> deleteSexById(@RequestParam int id) {
-        sexService.deleteSexById(id);
+        sexService.delete(id);
         return new ResponseEntity("good", HttpStatus.CREATED);
     }
 

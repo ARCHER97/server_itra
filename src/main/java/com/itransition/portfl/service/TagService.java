@@ -1,10 +1,15 @@
 package com.itransition.portfl.service;
 
-import org.springframework.stereotype.Service;
+import com.itransition.portfl.model.Tag;
+
+import java.util.List;
 
 /**
- * Created by Artur on 10.04.2017.
+ * @author Kulik Artur
  */
-@Service
 public interface TagService {
+    List<Tag> findAll();
+    Tag findById(Integer id);
+    void save(Tag tag);
+    void delete(Integer id);
 }

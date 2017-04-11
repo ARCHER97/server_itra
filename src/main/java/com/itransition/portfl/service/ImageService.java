@@ -1,10 +1,14 @@
 package com.itransition.portfl.service;
 
-import org.springframework.stereotype.Service;
+import com.itransition.portfl.model.Image;
+
+import java.util.List;
 
 /**
- * Created by Artur on 10.04.2017.
+ * @author Kulik Artur
  */
-@Service
 public interface ImageService {
+    List<Image> findAllByUserId(Integer id);
+    void save(Image image);
+    void delete(Integer id);
 }

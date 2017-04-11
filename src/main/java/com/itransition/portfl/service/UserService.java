@@ -1,8 +1,15 @@
 package com.itransition.portfl.service;
 
-/**
- * Created by Artur on 10.04.2017.
- */
-public interface UserService extends org.springframework.security.core.userdetails.UserDetailsService {
+import com.itransition.portfl.model.User;
 
+import java.util.List;
+
+/**
+ * @author Kulik Artur
+ */
+public interface UserService {
+    List<User> findAll();
+    User findById(Integer id);
+    void save(User user);
+    void delete(Integer id);
 }
