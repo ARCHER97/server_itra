@@ -1,7 +1,9 @@
-package com.itransition.portfl.service;
+package com.itransition.portfl.service.impl;
 
 import com.itransition.portfl.model.Tag;
+import com.itransition.portfl.repository.ImagesTagsRepository;
 import com.itransition.portfl.repository.TagRepository;
+import com.itransition.portfl.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +15,15 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class TagServiceImpl implements TagService{
+public class TagServiceImpl implements TagService {
 
     private TagRepository tagRepository;
+    private ImagesTagsRepository imagesTagsRepository;
 
     @Autowired
-    public TagServiceImpl(TagRepository tagRepository){
+    public TagServiceImpl(TagRepository tagRepository, ImagesTagsRepository imagesTagsRepository){
         this.tagRepository = tagRepository;
+        this.imagesTagsRepository = imagesTagsRepository;
     }
 
     @Override
@@ -30,6 +34,11 @@ public class TagServiceImpl implements TagService{
     @Override
     public Tag findById(Integer id) {
         return this.tagRepository.findOne(id);
+    }
+
+    @Override
+    public List<Tag> findByImageId(Integer id) {
+        return this.imagesTagsRepository.findAllByImageId(id);
     }
 
     @Override

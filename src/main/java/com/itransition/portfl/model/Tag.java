@@ -7,9 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-/**
- * Created by Artur on 09.04.2017.
- */
+
 @Entity
 @Table(name = "tags")
 @Getter
@@ -21,13 +19,10 @@ public class Tag {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "text")
     private String text;
 
-    public Tag(String text) {
-        this.text = text;
-    }
 
 }

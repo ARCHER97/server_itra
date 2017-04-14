@@ -7,9 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-/**
- * Created by Artur on 09.04.2017.
- */
+
 @Entity
 @Table(name = "users_profiles")
 @Getter

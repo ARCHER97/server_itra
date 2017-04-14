@@ -1,8 +1,8 @@
 package com.itransition.portfl.repository;
 
 import com.itransition.portfl.model.Comment;
+import com.itransition.portfl.model.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
-    @Query(value = "SELECT i FROM Comment i WHERE i.image.id = ?1")
-    List<Comment> findAllByImageId(Integer id);
+    List<Comment> findByImage(Image image);
 
+    List<Comment> findAllByImageId(Integer id);
 }

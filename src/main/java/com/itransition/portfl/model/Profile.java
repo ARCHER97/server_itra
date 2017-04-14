@@ -7,9 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-/**
- * Created by Artur on 09.04.2017.
- */
+
 @Entity
 @Getter
 @Setter
@@ -27,15 +25,29 @@ public class Profile {
     @JoinColumn(name = "id_user", nullable = false)
     private User user;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_sex", nullable = false)
+    private Sex sex;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_types_of_photography", nullable = false)
+    private TypeOfPhotography typeOfPhotography;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "yearOfBirth")
+    private Integer yearOfBirth;
+
+    @Column(name = "height")
+    private Integer height;
+
+    @Column(name = "weight")
+    private Integer weight;
+
     @Column(name = "rating")
     private Double rating;
 
     @Column(name = "col_like")
     private Integer colLike;
-
-    public Profile(User user, Double rating, Integer colLike) {
-        this.user = user;
-        this.rating = rating;
-        this.colLike = colLike;
-    }
 }

@@ -7,25 +7,33 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-
+/**
+ * @author Kulik Artur
+ */
 @Entity
-@Table(name = "image_tags")
+@Table(name = "users_roles")
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class ImagesTags {
+public class UsersRoles {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_image", nullable = false)
-    private Image image;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
+    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_tag", nullable = false)
-    private Tag tag;
+    @JoinColumn(name = "id_role")
+    private Role role;
+
+    public UsersRoles(User user, Role role){
+        this.user = user;
+        this.role = role;
+    }
 }
+

@@ -7,45 +7,39 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Created by Artur on 09.04.2017.
+ * @author Kulik Artur
  */
 @RestController
-@RequestMapping( value = "/image" )
+@RequestMapping(value = "/images")
 public class ImageController {
 
     private ImageService imageService;
 
     @Autowired
-    public ImageController(ImageService imageService){
+    public ImageController(ImageService imageService) {
         this.imageService = imageService;
     }
 
-    //Todo
-    @GetMapping( value = "/getfirst" )
-    public ResponseEntity<?> getFirstImageByUserId(@RequestParam int id){
-        return ResponseEntity.ok("first image");
+    @GetMapping(value = "/getfirst")
+    public ResponseEntity<?> getFirstImageByUserId(@RequestParam int id) {
+        return ResponseEntity.ok(this.imageService.findFirstByUserId(id));
     }
 
-    @GetMapping( value = "/get" )
-    public ResponseEntity<?> getAllByUserId(@RequestParam int id){
+    @GetMapping(value = "/get")
+    public ResponseEntity<?> getAllByUserId(@RequestParam int id) {
         return ResponseEntity.ok(this.imageService.findAllByUserId(id));
     }
 
-    @PostMapping( value = "/save" )
-    public ResponseEntity<?> save(@RequestBody Image image){
+    @PostMapping(value = "/save")
+    public ResponseEntity<?> save(@RequestBody Image image) {
         this.imageService.save(image);
         return ResponseEntity.ok("ok");
     }
 
-    @PostMapping( value = "/remove" )
-    public ResponseEntity<?> remove(@RequestBody int id){
+    @PostMapping(value = "/delete")
+    public ResponseEntity<?> remove(@RequestBody int id) {
         this.imageService.delete(id);
         return ResponseEntity.ok("ok");
-    }
-
-    @PostMapping( value = "/update" )
-    public ResponseEntity<?> update(@RequestBody String image){
-        return ResponseEntity.ok("update image");
     }
 
 }

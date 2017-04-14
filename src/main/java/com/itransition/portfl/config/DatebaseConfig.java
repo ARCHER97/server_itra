@@ -1,14 +1,10 @@
 package com.itransition.portfl.config;
 
-/**
- * Created by User on 06.04.2017.
- */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -51,29 +47,11 @@ public class DatebaseConfig {
         return dataSource;
     }
 
-    /**
-     * PersistenceExceptionTranslationPostProcessor is a bean post processor
-     * which adds an advisor to any bean annotated with Repository so that any
-     * platform-specific exceptions are caught and then rethrown as one
-     * Spring's unchecked data access exceptions (i.e. a subclass of
-     * DataAccessException).
-     */
-
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
-
-    // Private fields
-
     @Autowired
     private Environment env;
 
     @Autowired
     private DataSource dataSource;
-
-    @Autowired
-    private LocalContainerEntityManagerFactoryBean entityManagerFactory;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -114,7 +92,7 @@ public class DatebaseConfig {
         JpaTransactionManager transactionManager =
                 new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(
-                entityManagerFactory.getObject());
+                this.entityManagerFactory().getObject());
         return transactionManager;
     }
 

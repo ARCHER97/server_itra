@@ -7,9 +7,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-/**
- * Created by Artur on 09.04.2017.
- */
 @Entity
 @Table(name = "types_of_photography")
 @Getter

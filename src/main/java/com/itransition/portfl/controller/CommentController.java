@@ -7,26 +7,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Created by Artur on 09.04.2017.
+ * @author Kulik Artur
  */
 @RestController
-@RequestMapping( value = "/comment" )
+@RequestMapping(value = "/comments")
 public class CommentController {
 
     private CommentService commentService;
 
     @Autowired
-    public CommentController(CommentService commentService){
+    public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
 
-    @GetMapping( value = "/get")
-    public ResponseEntity<?> getCommentsByImageId(@RequestParam int id){
+    @GetMapping(value = "/images/{id}")
+    public ResponseEntity<?> getCommentsByImageId(@PathVariable Integer id) {
         return ResponseEntity.ok(this.commentService.findAllByImageId(id));
     }
 
-    @PostMapping( value = "/save" )
-    public ResponseEntity<?> save(@RequestBody Comment comment){
+    @PostMapping(value = "/save")
+    public ResponseEntity<?> save(@RequestBody Comment comment) {
         this.commentService.save(comment);
         return ResponseEntity.ok("ok");
     }

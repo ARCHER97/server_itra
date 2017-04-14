@@ -7,9 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-/**
- * Created by Artur on 09.04.2017.
- */
+
 @Entity
 @Table(name = "images")
 @Getter
@@ -33,9 +31,4 @@ public class Image {
     @Column(name = "url")
     private String url;
 
-    public Image(User user, Integer position, String url) {
-        this.user = user;
-        this.position = position;
-        this.url = url;
-    }
 }

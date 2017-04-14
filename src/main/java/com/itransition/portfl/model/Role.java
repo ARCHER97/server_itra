@@ -1,6 +1,5 @@
 package com.itransition.portfl.model;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,27 +7,21 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+
+@Entity
+@Table(name = "roles")
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
-@Table(name = "sex")
 @ToString
-public class Sex {
+public class Role {
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    public Sex(String name) {
-        this.name = name;
-    }
-
+    @Column(name = "rolename")
+    private String rolename;
 
 }
-
-

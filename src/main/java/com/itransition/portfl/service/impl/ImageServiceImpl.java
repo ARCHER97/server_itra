@@ -1,12 +1,14 @@
-package com.itransition.portfl.service;
+package com.itransition.portfl.service.impl;
 
 import com.itransition.portfl.model.Image;
 import com.itransition.portfl.repository.ImageRepository;
+import com.itransition.portfl.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
+
 
 /**
  * @author Kulik Artur
@@ -25,6 +27,11 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public List<Image> findAllByUserId(Integer id) {
         return this.imageRepository.findAllByUserId(id);
+    }
+
+    @Override
+    public Image findFirstByUserId(Integer id) {
+        return this.imageRepository.findByIdUserAndPosition(id, 1);
     }
 
     @Override

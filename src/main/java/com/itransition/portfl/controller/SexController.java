@@ -2,49 +2,43 @@ package com.itransition.portfl.controller;
 
 import com.itransition.portfl.dto.SexDTO;
 import com.itransition.portfl.model.Sex;
-import com.itransition.portfl.repository.SexRepository;
 import com.itransition.portfl.service.SexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by Artur on 09.04.2017.
- */
+
 @RestController
 @RequestMapping(value = "/sex")
 public class SexController {
 
     @Autowired
-    private SexRepository sexRepository;
-
-    @Autowired
     private SexService sexService;
 
-    @GetMapping(value = "/getall")
+    @GetMapping(value = "")
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok(sexService.findAll());
     }
 
-    @GetMapping(value = "/get")
-    public ResponseEntity<?> findOneById(@RequestParam int id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> findOneById(@PathVariable Integer id) {
         return ResponseEntity.ok(sexService.findById(id));
     }
 
     @PostMapping(value = "/save")
     public ResponseEntity<String> save(@RequestBody SexDTO sexDTO) {
         sexService.save(toSex(sexDTO));
-        return new ResponseEntity("good", HttpStatus.CREATED);
+        return new ResponseEntity<String>("good", HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/delete")
-    public ResponseEntity<?> deleteSexById(@RequestParam int id) {
+    public ResponseEntity<?> deleteSexById(@RequestBody int id) {
         sexService.delete(id);
         return ResponseEntity.ok("ok");
     }
 
-    public Sex toSex(SexDTO sexDTO){
+    private Sex toSex(SexDTO sexDTO) {
         Sex sex = new Sex();
         sex.setName(sexDTO.getName());
         return sex;

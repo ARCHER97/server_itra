@@ -1,11 +1,12 @@
-package com.itransition.portfl.service;
+package com.itransition.portfl.service.impl;
 
 import com.itransition.portfl.model.Comment;
 import com.itransition.portfl.repository.CommentRepository;
+import com.itransition.portfl.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class CommentServiceImpl implements  CommentService{
+public class CommentServiceImpl implements CommentService {
 
     private CommentRepository commentRepository;
 
