@@ -1,5 +1,6 @@
 package com.itransition.portfl.service;
 
+import com.itransition.portfl.dto.ImageDTO;
 import com.itransition.portfl.model.Image;
 
 import java.util.List;
@@ -10,6 +11,6 @@ import java.util.List;
 public interface ImageService {
     List<Image> findAllByUserId(Integer id);
     Image findFirstByUserId(Integer id);
-    void save(Image image);
+    void save(ImageDTO imageDTO);
     void delete(Integer id);
 }

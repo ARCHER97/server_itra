@@ -9,6 +9,6 @@ import com.itransition.portfl.model.Sex;
 public interface SexService {
     Iterable<Sex> findAll();
     Sex findById(Integer id);
-    void save(Sex post);
+    void save(Sex sex);
     void delete(Integer id);
 }

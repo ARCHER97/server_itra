@@ -17,11 +17,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 public class UsersRoles {
-
     @Id
+    @GeneratedValue
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")

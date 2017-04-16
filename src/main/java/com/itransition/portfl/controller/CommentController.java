@@ -1,6 +1,6 @@
 package com.itransition.portfl.controller;
 
-import com.itransition.portfl.model.Comment;
+import com.itransition.portfl.dto.CommentDTO;
 import com.itransition.portfl.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +26,8 @@ public class CommentController {
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<?> save(@RequestBody Comment comment) {
-        this.commentService.save(comment);
+    public ResponseEntity<?> save(@RequestBody CommentDTO commentDTO) {
+        this.commentService.save(commentDTO);
         return ResponseEntity.ok("ok");
     }
 

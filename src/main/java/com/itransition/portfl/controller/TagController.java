@@ -19,7 +19,7 @@ public class TagController {
         this.tagService = tagService;
     }
 
-    @GetMapping(value = "get")
+    @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(this.tagService.findAll());
     }

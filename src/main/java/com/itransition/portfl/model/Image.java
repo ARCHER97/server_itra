@@ -1,5 +1,6 @@
 package com.itransition.portfl.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +22,8 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
     private User user;
 
@@ -31,4 +33,9 @@ public class Image {
     @Column(name = "url")
     private String url;
 
+    public Image(User user, Integer position, String url){
+        this.user = user;
+        this.position = position;
+        this.url = url;
+    }
 }

@@ -1,7 +1,11 @@
 package com.itransition.portfl.service.impl;
 
+import com.itransition.portfl.dto.ProfileDTO;
 import com.itransition.portfl.model.Profile;
 import com.itransition.portfl.repository.ProfileRepository;
+import com.itransition.portfl.repository.SexRepository;
+import com.itransition.portfl.repository.TypeOfPhotographyRepository;
+import com.itransition.portfl.repository.UserRepository;
 import com.itransition.portfl.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +20,17 @@ import javax.transaction.Transactional;
 public class ProfileServiceImpl implements ProfileService {
 
     private ProfileRepository profileRepository;
+    private UserRepository userRepository;
+    private SexRepository sexRepository;
+    private TypeOfPhotographyRepository typeOfPhotographyRepository;
 
     @Autowired
-    public ProfileServiceImpl(ProfileRepository profileRepository){
+    public ProfileServiceImpl(ProfileRepository profileRepository, UserRepository userRepository,
+                              SexRepository sexRepository, TypeOfPhotographyRepository typeOfPhotographyRepository){
         this.profileRepository = profileRepository;
+        this.userRepository = userRepository;
+        this.sexRepository = sexRepository;
+        this.typeOfPhotographyRepository = typeOfPhotographyRepository;
     }
 
     @Override
@@ -33,8 +44,13 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public void save(Profile profile) {
+    public Integer save(ProfileDTO profileDTO) {
+        Profile profile = profileDTO.toProfileWithoutUserSexTypeOfPhotography();
+        profile.setUser(this.userRepository.findOne(profileDTO.getIdUser()));
+        profile.setSex(this.sexRepository.findOne(profileDTO.getIdSex()));
+        profile.setTypeOfPhotography(this.typeOfPhotographyRepository.findOne(profileDTO.getIdTypeOfPhotography()));
         this.profileRepository.save(profile);
+        return this.profileRepository.findByUserId(profile.getUser().getId()).getId();
     }
 
     @Override

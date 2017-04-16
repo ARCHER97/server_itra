@@ -1,7 +1,9 @@
 package com.itransition.portfl.service.impl;
 
+import com.itransition.portfl.dto.CommentDTO;
 import com.itransition.portfl.model.Comment;
 import com.itransition.portfl.repository.CommentRepository;
+import com.itransition.portfl.repository.ImageRepository;
 import com.itransition.portfl.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +20,12 @@ public class CommentServiceImpl implements CommentService {
 
     private CommentRepository commentRepository;
 
+    private ImageRepository imageRepository;
+
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository){
+    public CommentServiceImpl(CommentRepository commentRepository, ImageRepository imageRepository){
         this.commentRepository = commentRepository;
+        this.imageRepository = imageRepository;
     }
 
     @Override
@@ -29,7 +34,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void save(Comment comment) {
+    public void save(CommentDTO commentDTO) {
+        Comment comment = commentDTO.toCommentWithoutImage();
+        comment.setImage(this.imageRepository.findOne(commentDTO.getImageId()));
         this.commentRepository.save(comment);
     }
 

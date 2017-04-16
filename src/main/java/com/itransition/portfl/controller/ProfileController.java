@@ -1,5 +1,6 @@
 package com.itransition.portfl.controller;
 
+import com.itransition.portfl.dto.ProfileDTO;
 import com.itransition.portfl.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,19 +17,24 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @GetMapping(value = "/{id}")
+    @PostMapping(value = "create")
+    public ResponseEntity<?> create(@RequestBody ProfileDTO profileDTO) {
+        return ResponseEntity.ok(this.profileService.save(profileDTO));
+    }
+
+    @GetMapping(value = "get/{id}")
     public ResponseEntity<?> getProfileById(@PathVariable Integer id) {
         return ResponseEntity.ok(this.profileService.findById(id));
     }
 
-    @GetMapping(value = "/user/{id}")
+    @GetMapping(value = "get/user/{id}")
     public ResponseEntity<?> getProfileByUserId(@PathVariable Integer id) {
         return ResponseEntity.ok(this.profileService.findByUserId(id));
     }
 
-    @GetMapping(value = "/rating")
-    public ResponseEntity<?> getRatingById(@RequestParam int id) {
-        return ResponseEntity.ok(this.profileService.findByUserId(id));
+    @GetMapping(value = "/rating/{id}")
+    public ResponseEntity<?> getRatingById(@PathVariable int id) {
+        return ResponseEntity.ok(this.profileService.findByUserId(id).getRating());
     }
 
 }

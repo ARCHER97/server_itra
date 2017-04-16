@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @ToString
-public class User{
+public class User {
 
     @Id
     @Column(name = "id")

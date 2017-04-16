@@ -24,25 +24,21 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "")
+    @GetMapping(value = "getAll")
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(this.userService.findAll());
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Integer id) {
-        return ResponseEntity.ok(this.getUserById(id));
+    @GetMapping(value = "get/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable(value = "id") Integer id) {
+        return ResponseEntity.ok(this.userService.findById(id));
     }
 
-    @GetMapping(value = "/update")
-    public ResponseEntity<?> updateUserById(@RequestParam int id) {
-        return ResponseEntity.ok("update");
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping(value = "create")
     public ResponseEntity create(@Valid @RequestBody UserDTO userDTO) {
         userService.createUser(userDTO);
         HttpHeaders headers = new HttpHeaders();
+        headers.add("token", "test-token");
         return new ResponseEntity(headers, HttpStatus.OK);
     }
 

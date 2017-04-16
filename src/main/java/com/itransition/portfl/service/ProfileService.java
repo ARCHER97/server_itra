@@ -1,5 +1,6 @@
 package com.itransition.portfl.service;
 
+import com.itransition.portfl.dto.ProfileDTO;
 import com.itransition.portfl.model.Profile;
 
 /**
@@ -8,7 +9,7 @@ import com.itransition.portfl.model.Profile;
 public interface ProfileService {
     Profile findByUserId(Integer id);
     Profile findById(Integer id);
-    void save(Profile profile);
+    Integer save(ProfileDTO profileDTO);
     void delete(Integer id);
     Integer findRatingByUserId(Integer id);
 }
