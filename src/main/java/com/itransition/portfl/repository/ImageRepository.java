@@ -13,10 +13,10 @@ import java.util.List;
  */
 public interface ImageRepository extends JpaRepository<Image, Integer> {
 
-    List<Image> findByUser(User user);
+    List<Image> findByProfile(User user);
 
-    List<Image> findAllByUserId(Integer id);
+    List<Image> findAllByProfileId(Integer id);
 
-    @Query("SELECT i FROM Image as i WHERE i.position = :position AND i.user.id = 1")
-    Image findByIdUserInPosition1(@Param("id") Integer id);
+    @Query("SELECT i FROM Image as i WHERE i.position = 1 AND i.profile.id = :id")
+    Image findByIdProfileInPosition1(@Param("id") Integer id);
 }

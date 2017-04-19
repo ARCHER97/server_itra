@@ -24,8 +24,8 @@ public class Image {
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
-    private User user;
+    @JoinColumn(name = "id_profile")
+    private Profile profile;
 
     @Column(name = "position")
     private Integer position;
@@ -33,8 +33,8 @@ public class Image {
     @Column(name = "url")
     private String url;
 
-    public Image(User user, Integer position, String url){
-        this.user = user;
+    public Image(Profile profile, Integer position, String url){
+        this.profile = profile;
         this.position = position;
         this.url = url;
     }

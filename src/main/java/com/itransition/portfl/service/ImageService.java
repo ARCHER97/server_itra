@@ -11,6 +11,6 @@ import java.util.List;
 public interface ImageService {
     List<Image> findAllByUserId(Integer id);
     Image findFirstByUserId(Integer id);
-    void save(ImageDTO imageDTO);
+    Integer save(ImageDTO imageDTO);
     void delete(Integer id);
 }

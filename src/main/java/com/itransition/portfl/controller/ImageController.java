@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author Kulik Artur
  */
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/images")
 public class ImageController {
