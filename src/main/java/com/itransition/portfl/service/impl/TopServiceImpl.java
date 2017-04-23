@@ -38,7 +38,8 @@ public class TopServiceImpl implements TopService {
         for(int i = 0; i < sortProfiles.size(); i++){
             Image image = this.imageRepository.findByIdProfileInPosition1(sortProfiles.get(i).getId());
             Top top = new Top(sortProfiles.get(i).getId(), sortProfiles.get(i).getName(),
-                              sortProfiles.get(i).getRating(), image.getUrl());
+                              sortProfiles.get(i).getRating(), "");
+            if(image != null){top.setUrl(image.getUrl());}
             list.add(top);
             if(i>=col) break;
         }
