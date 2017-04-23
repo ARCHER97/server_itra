@@ -28,7 +28,7 @@ public class ImageController {
 
     @GetMapping(value = "/getAll/{id}")
     public ResponseEntity<?> getAllByUserId(@PathVariable(value = "id") Integer id) {
-        return ResponseEntity.ok(this.imageService.findAllByUserId(id));
+        return ResponseEntity.ok(this.imageService.findAllByProfileId(id));
     }
 
     @PostMapping(value = "/save")

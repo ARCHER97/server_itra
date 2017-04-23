@@ -12,16 +12,18 @@ import lombok.Setter;
 @Setter
 public class Top {
 
+    private Integer id;
+
     private String name;
 
-    private Integer rating;
+    private Double rating;
 
     private String url;
 
-    public Top(String name, Integer rating, String url){
+    public Top(Integer id, String name, Double rating, String url){
+        this.id = id;
         this.name = name;
         this.rating = rating;
         this.url = url;
     }
-
 }

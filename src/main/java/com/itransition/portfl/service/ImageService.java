@@ -9,7 +9,7 @@ import java.util.List;
  * @author Kulik Artur
  */
 public interface ImageService {
-    List<Image> findAllByUserId(Integer id);
+    List<Image> findAllByProfileId(Integer id);
     Image findFirstByUserId(Integer id);
     Integer save(ImageDTO imageDTO);
     void delete(Integer id);

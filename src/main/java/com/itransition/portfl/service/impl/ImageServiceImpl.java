@@ -29,7 +29,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<Image> findAllByUserId(Integer id) {
+    public List<Image> findAllByProfileId(Integer id) {
         return this.imageRepository.findAllByProfileId(id);
     }
 
