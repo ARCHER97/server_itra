@@ -14,9 +14,12 @@ import lombok.Setter;
 public class PersonContext{
     private UserDTO userDTO;
     private ProfileDTO profileDTO;
+    private ImageDTO imageDTO;
     public PersonContext(@JsonProperty("user") UserDTO userDTO,
-                         @JsonProperty("profile") ProfileDTO profileDTO){
+                         @JsonProperty("profile") ProfileDTO profileDTO,
+                         @JsonProperty("image") ImageDTO imageDTO){
         this.userDTO = userDTO;
         this.profileDTO = profileDTO;
+        this.imageDTO = imageDTO;
     }
 }

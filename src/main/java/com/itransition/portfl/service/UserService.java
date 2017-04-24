@@ -15,5 +15,5 @@ public interface UserService extends UserDetailsService {
     Optional<User> findUser(Integer id);
     User save(User user);
     void delete(Integer id);
-    void createUser(UserDTO userDTO);
+    User createUser(UserDTO userDTO);
 }

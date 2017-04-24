@@ -1,12 +1,12 @@
 package com.itransition.portfl.service.impl;
 
+import com.itransition.portfl.dto.ImageDTO;
 import com.itransition.portfl.dto.ProfileDTO;
 import com.itransition.portfl.dto.UserDTO;
-import com.itransition.portfl.model.Role;
+import com.itransition.portfl.model.Image;
 import com.itransition.portfl.model.User;
-import com.itransition.portfl.model.UsersRoles;
+import com.itransition.portfl.repository.ImageRepository;
 import com.itransition.portfl.repository.RoleRepositiry;
-import com.itransition.portfl.repository.UsersRolesRepository;
 import com.itransition.portfl.service.AuthService;
 import com.itransition.portfl.service.ProfileService;
 import com.itransition.portfl.service.UserService;
@@ -22,16 +22,16 @@ public class AuthServiviceImpl implements AuthService {
 
     private UserService userService;
     private ProfileService profileService;
-    private UsersRolesRepository usersRolesRepository;
     private RoleRepositiry roleRepositiry;
+    private ImageRepository imageRepository;
 
     @Autowired
     public AuthServiviceImpl(UserService userService, ProfileService profileService,
-                             UsersRolesRepository usersRolesRepository, RoleRepositiry roleRepositiry) {
+                             RoleRepositiry roleRepositiry, ImageRepository imageRepository) {
         this.userService = userService;
         this.profileService = profileService;
-        this.usersRolesRepository = usersRolesRepository;
         this.roleRepositiry = roleRepositiry;
+        this.imageRepository = imageRepository;
     }
 
     @Override
@@ -46,28 +46,26 @@ public class AuthServiviceImpl implements AuthService {
     }
 
     @Override
-    public boolean singup(UserDTO userDTO, ProfileDTO profileDTO) {
+    public boolean singup(UserDTO userDTO, ProfileDTO profileDTO, ImageDTO imageDTO) {
         User user = userDTO.toUser();
         try {
             this.userService.loadUserByUsername(user.getUsername());
         } catch (Exception e) {
-            user = this.userService.save(user);
-            saveProfile(user.getId(), profileDTO);
-            saveUserRole(user, this.roleRepositiry.findOne(1));
+            user = this.userService.createUser(userDTO);
+            Integer idProfile = saveProfile(user.getId(), profileDTO);
+            Image image = imageDTO.toImageWithoutProfile();
+            image.setProfile(this.profileService.findById(idProfile));
+            this.imageRepository.save(image);
             return true;
         }
         return false;
     }
 
-    private void saveProfile(Integer id, ProfileDTO profileDTO) {
+    private Integer saveProfile(Integer id, ProfileDTO profileDTO) {
         profileDTO.setIdUser(id);
         profileDTO.setColLike(0);
         profileDTO.setRating(0.0);
-        this.profileService.save(profileDTO);
-    }
-
-    private void saveUserRole(User user, Role role) {
-        this.usersRolesRepository.save(new UsersRoles(user, role));
+        return this.profileService.save(profileDTO);
     }
 
 }

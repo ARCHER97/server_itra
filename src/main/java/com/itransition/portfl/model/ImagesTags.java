@@ -28,4 +28,5 @@ public class ImagesTags {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tag", nullable = false)
     private Tag tag;
+
 }

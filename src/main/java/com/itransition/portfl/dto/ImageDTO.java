@@ -20,7 +20,7 @@ public class ImageDTO {
 
     private String url;
 
-    public ImageDTO(@JsonProperty("idProfile") Integer idUser,
+    public ImageDTO(@JsonProperty("idProfile") Integer idProfile,
                     @JsonProperty("position") Integer position,
                     @JsonProperty("url") String url) {
         this.idProfile = idProfile;
@@ -28,9 +28,15 @@ public class ImageDTO {
         this.url = url;
     }
 
-    public Image toImageWithoutUser(){
+    public Image toImageWithoutProfile(){
         Image image = new Image();
         image.setPosition(this.position);
+        image.setUrl(this.url);
+        return image;
+    }
+
+    public Image toImageWithUrl(){
+        Image image = new Image();
         image.setUrl(this.url);
         return image;
     }

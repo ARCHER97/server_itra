@@ -45,7 +45,8 @@ public class UserController {
     @PostMapping(value = "singup")
     public ResponseEntity singup(@RequestBody PersonContext personContext) {
         String res = "";
-        if(this.authService.singup(personContext.getUserDTO(), personContext.getProfileDTO())) {
+        if(this.authService.singup(personContext.getUserDTO(),
+                personContext.getProfileDTO(), personContext.getImageDTO())) {
             res = this.jwtTokenHandler.createTokenForUser(personContext.getUserDTO().toUser());
         }
 

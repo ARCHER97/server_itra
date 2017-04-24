@@ -1,6 +1,9 @@
 package com.itransition.portfl.service.impl;
 
+import com.itransition.portfl.dto.TagDTO;
+import com.itransition.portfl.model.ImagesTags;
 import com.itransition.portfl.model.Tag;
+import com.itransition.portfl.repository.ImageRepository;
 import com.itransition.portfl.repository.ImagesTagsRepository;
 import com.itransition.portfl.repository.TagRepository;
 import com.itransition.portfl.service.TagService;
@@ -19,11 +22,14 @@ public class TagServiceImpl implements TagService {
 
     private TagRepository tagRepository;
     private ImagesTagsRepository imagesTagsRepository;
+    private ImageRepository imageRepository;
 
     @Autowired
-    public TagServiceImpl(TagRepository tagRepository, ImagesTagsRepository imagesTagsRepository){
+    public TagServiceImpl(TagRepository tagRepository, ImagesTagsRepository imagesTagsRepository,
+                          ImageRepository imageRepository){
         this.tagRepository = tagRepository;
         this.imagesTagsRepository = imagesTagsRepository;
+        this.imageRepository = imageRepository;
     }
 
     @Override
@@ -42,8 +48,19 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void save(Tag tag) {
-        this.tagRepository.save(tag);
+    public void save(TagDTO tagDTO) {
+        Tag tag = this.tagRepository.save(tagDTO.toTag());
+        ImagesTags imagesTags = tagDTO.getVoidImagesTags();
+        imagesTags.setImage(this.imageRepository.findOne(tagDTO.getIdImage()));
+        imagesTags.setTag(tag);
+        this.imagesTagsRepository.save(imagesTags);
+    }
+
+    @Override
+    public void saveall(TagDTO[] tagsDTO) {
+        for(int i = 0; i < tagsDTO.length; i++ ){
+            this.save(tagsDTO[i]);
+        }
     }
 
     @Override

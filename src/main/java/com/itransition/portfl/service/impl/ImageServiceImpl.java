@@ -40,8 +40,18 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Integer save(ImageDTO imageDTO) {
-        Image image = imageDTO.toImageWithoutUser();
+        Image image = imageDTO.toImageWithoutProfile();
         image.setProfile(this.profileRepository.findOne(imageDTO.getIdProfile()));
+        image = this.imageRepository.save(image);
+        return image.getId();
+    }
+
+    @Override
+    public Integer saveNext(ImageDTO imageDTO){
+        Image image = imageDTO.toImageWithUrl();
+        image.setProfile(this.profileRepository.findOne(imageDTO.getIdProfile()));
+        Integer nextPosition = this.imageRepository.findImageWhereMaxPosition() + 1;
+        image.setPosition(nextPosition);
         image = this.imageRepository.save(image);
         return image.getId();
     }

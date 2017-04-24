@@ -48,4 +48,8 @@ public final class UserDTO {
         return Collections.singleton(() -> ROLE_USER);
     }
 
+    @Override
+    public String toString(){
+        return this.login + " " + this.password;
+    }
 }

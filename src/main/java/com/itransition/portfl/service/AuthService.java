@@ -1,5 +1,6 @@
 package com.itransition.portfl.service;
 
+import com.itransition.portfl.dto.ImageDTO;
 import com.itransition.portfl.dto.ProfileDTO;
 import com.itransition.portfl.dto.UserDTO;
 
@@ -10,6 +11,6 @@ public interface AuthService {
 
     boolean login(UserDTO userDTO);
 
-    boolean singup(UserDTO userDTO, ProfileDTO profileDTO);
+    boolean singup(UserDTO userDTO, ProfileDTO profileDTO, ImageDTO imageDTO);
 
 }

@@ -62,4 +62,5 @@ public class ProfileDTO {
         profile.setColLike(this.colLike);
         return profile;
     }
+
 }

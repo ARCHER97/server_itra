@@ -1,5 +1,6 @@
 package com.itransition.portfl.service;
 
+import com.itransition.portfl.dto.TagDTO;
 import com.itransition.portfl.model.Tag;
 
 import java.util.List;
@@ -11,6 +12,7 @@ public interface TagService {
     List<Tag> findAll();
     Tag findById(Integer id);
     List<Tag> findByImageId(Integer id);
-    void save(Tag tag);
+    void save(TagDTO tagDTO);
+    void saveall(TagDTO[] tags);
     void delete(Integer id);
 }

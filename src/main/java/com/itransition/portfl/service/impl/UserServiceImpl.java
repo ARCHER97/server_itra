@@ -60,10 +60,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(UserDTO userDTO) {
+    public User createUser(UserDTO userDTO) {
         User user = userDTO.toUser();
         user = userRepository.save(user);
         this.usersRolesRepository.save(new UsersRoles(user, this.roleRepository.getOne(1)));
+        return user;
     }
 
     @Override
