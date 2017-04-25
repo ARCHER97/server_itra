@@ -34,6 +34,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public List<Comment> findAll() {
+        return this.commentRepository.findAll();
+    }
+
+    @Override
     public void save(CommentDTO commentDTO) {
         Comment comment = commentDTO.toCommentWithoutImage();
         comment.setImage(this.imageRepository.findOne(commentDTO.getImageId()));

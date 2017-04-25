@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author Kulik Artur
  */
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/comments")
 public class CommentController {
@@ -20,9 +21,14 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping(value = "/images/{id}")
+    @GetMapping(value = "/getAll/{id}")
     public ResponseEntity<?> getCommentsByImageId(@PathVariable Integer id) {
         return ResponseEntity.ok(this.commentService.findAllByImageId(id));
+    }
+
+    @GetMapping(value = "/getAll")
+    public ResponseEntity<?> getAllComments() {
+        return ResponseEntity.ok(this.commentService.findAll());
     }
 
     @PostMapping(value = "/save")
