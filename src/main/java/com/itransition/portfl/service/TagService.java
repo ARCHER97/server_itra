@@ -13,6 +13,6 @@ public interface TagService {
     Tag findById(Integer id);
     List<Tag> findByImageId(Integer id);
     void save(TagDTO tagDTO);
-    void saveall(TagDTO[] tags);
+    void saveAll(List<TagDTO> tags);
     void delete(Integer id);
 }

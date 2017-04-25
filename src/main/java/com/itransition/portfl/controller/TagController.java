@@ -1,5 +1,6 @@
 package com.itransition.portfl.controller;
 
+import com.itransition.portfl.dto.ArrayTagsDTO;
 import com.itransition.portfl.dto.TagDTO;
 import com.itransition.portfl.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class TagController {
     }
 
     @PostMapping(value = "/saveall")
-    public ResponseEntity<?> saveTags(@RequestBody TagDTO[] tagsDTO) {
-        this.tagService.saveall(tagsDTO);
+    public ResponseEntity<?> saveTags(@RequestBody ArrayTagsDTO tagsDTO) {
+        this.tagService.saveAll(tagsDTO.getTags());
         return ResponseEntity.ok("ok");
     }
 

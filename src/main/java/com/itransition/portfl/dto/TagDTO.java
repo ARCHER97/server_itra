@@ -6,6 +6,7 @@ import com.itransition.portfl.model.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Kulik Artur
@@ -13,6 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class TagDTO {
     private Integer idImage;
     private String text;
@@ -24,9 +26,7 @@ public class TagDTO {
     }
 
     public Tag toTag(){
-        Tag tag = new Tag();
-        tag.setText(this.text);
-        return tag;
+        return new Tag(this.text);
     }
 
     public ImagesTags getVoidImagesTags(){

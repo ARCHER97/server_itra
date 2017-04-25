@@ -34,13 +34,13 @@ public class ImageController {
     @PostMapping(value = "/save")
     public ResponseEntity<?> save(@RequestBody ImageDTO imageDTO) {
         Integer id = this.imageService.save(imageDTO);
-        return ResponseEntity.ok("id");
+        return ResponseEntity.ok(id);
     }
 
     @PostMapping(value = "/save/next")
     public ResponseEntity<?> saveNext(@RequestBody ImageDTO imageDTO) {
         Integer id = this.imageService.saveNext(imageDTO);
-        return ResponseEntity.ok("id");
+        return ResponseEntity.ok(id);
     }
 
     @GetMapping(value = "/delete/{id}")

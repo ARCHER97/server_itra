@@ -49,7 +49,8 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public void save(TagDTO tagDTO) {
-        Tag tag = this.tagRepository.save(tagDTO.toTag());
+        Tag tag = tagDTO.toTag();
+        tag = this.tagRepository.save(tag);
         ImagesTags imagesTags = tagDTO.getVoidImagesTags();
         imagesTags.setImage(this.imageRepository.findOne(tagDTO.getIdImage()));
         imagesTags.setTag(tag);
@@ -57,9 +58,9 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void saveall(TagDTO[] tagsDTO) {
-        for(int i = 0; i < tagsDTO.length; i++ ){
-            this.save(tagsDTO[i]);
+    public void saveAll(List<TagDTO> tagsDTO) {
+        for(int i = 0; i < tagsDTO.size(); i++ ){
+            this.save(tagsDTO.get(i));
         }
     }
 
