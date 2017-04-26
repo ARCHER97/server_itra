@@ -1,9 +1,11 @@
 package com.itransition.portfl.controller;
 
 import com.itransition.portfl.dto.CommentDTO;
+import com.itransition.portfl.security.JwtTokenHandler;
 import com.itransition.portfl.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
 
     private CommentService commentService;
+    private JwtTokenHandler jwtTokenHandler;
 
     @Autowired
-    public CommentController(CommentService commentService) {
+    public CommentController(CommentService commentService, JwtTokenHandler jwtTokenHandler) {
         this.commentService = commentService;
+        this.jwtTokenHandler = jwtTokenHandler;
     }
 
     @GetMapping(value = "/getAll/{id}")
@@ -34,6 +38,14 @@ public class CommentController {
     @PostMapping(value = "/save")
     public ResponseEntity<?> save(@RequestBody CommentDTO commentDTO) {
         this.commentService.save(commentDTO);
+        return ResponseEntity.ok("ok");
+    }
+
+    @PostMapping(value = "/savenaxt")
+    public ResponseEntity<?> saveNext(@RequestBody CommentDTO commentDTO,
+                                      @RequestHeader(value="jwt") String token) {
+        UserDetails userDetails = this.jwtTokenHandler.parseUserFromToken(token).get();
+        this.commentService.saveNext(commentDTO, userDetails);
         return ResponseEntity.ok("ok");
     }
 

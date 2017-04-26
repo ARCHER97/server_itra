@@ -1,6 +1,7 @@
 package com.itransition.portfl.controller;
 
 import com.itransition.portfl.dto.ImageDTO;
+import com.itransition.portfl.security.JwtTokenHandler;
 import com.itransition.portfl.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class ImageController {
 
     private ImageService imageService;
+    private JwtTokenHandler jwtTokenHandler;
 
     @Autowired
-    public ImageController(ImageService imageService) {
+    public ImageController(ImageService imageService, JwtTokenHandler jwtTokenHandler) {
         this.imageService = imageService;
+        this.jwtTokenHandler = jwtTokenHandler;
     }
 
     @GetMapping(value = "/getfirst/{id}")
