@@ -65,9 +65,9 @@ public class CommentServiceImpl implements CommentService {
             comment.setTitle(profile.getName());
         } else comment.setTitle("anonimus");
         comment.setImage(this.imageRepository.findOne(commentDTO.getImageId()));
-        Integer p = this.commentRepository.findCommentWhereMaxPosition(commentDTO.getImageId());
-        if(p == null) p = 0;
-        comment.setPosition(p + 1);
+        Integer pizdec = this.commentRepository.findCommentWhereMaxPosition(commentDTO.getImageId());
+        if(pizdec == null) pizdec = 0;
+        comment.setPosition(pizdec + 1);
 
         this.commentRepository.save(comment);
     }
