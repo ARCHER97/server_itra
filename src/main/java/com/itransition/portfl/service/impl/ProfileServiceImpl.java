@@ -2,12 +2,14 @@ package com.itransition.portfl.service.impl;
 
 import com.itransition.portfl.dto.ProfileDTO;
 import com.itransition.portfl.model.Profile;
+import com.itransition.portfl.model.User;
 import com.itransition.portfl.repository.ProfileRepository;
 import com.itransition.portfl.repository.SexRepository;
 import com.itransition.portfl.repository.TypeOfPhotographyRepository;
 import com.itransition.portfl.repository.UserRepository;
 import com.itransition.portfl.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -61,6 +63,13 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Integer findRatingByUserId(Integer id) {
         return this.profileRepository.findRatingByUserId(id);
+    }
+
+    @Override
+    public Profile findByUserDetals(UserDetails userDetails) {
+        User user = this.userRepository.findByLogin(userDetails.getUsername());
+        Profile profile = this.profileRepository.findByUser(user);
+        return profile;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.itransition.portfl.controller;
 
+import com.itransition.portfl.dto.ArrayImagesDTO;
 import com.itransition.portfl.dto.ImageDTO;
 import com.itransition.portfl.security.JwtTokenHandler;
 import com.itransition.portfl.service.ImageService;
@@ -49,6 +50,12 @@ public class ImageController {
     @GetMapping(value = "/delete/{id}")
     public ResponseEntity<?> remove(@PathVariable(value = "id") Integer id) {
         this.imageService.delete(id);
+        return ResponseEntity.ok("ok");
+    }
+
+    @PostMapping(value = "/saveall")
+    public ResponseEntity<?> saveAll(@RequestBody ArrayImagesDTO arrayImagesDTO) {
+        this.imageService.saveAll(arrayImagesDTO);
         return ResponseEntity.ok("ok");
     }
 

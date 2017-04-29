@@ -49,11 +49,11 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public void save(TagDTO tagDTO) {
-        Tag tag = tagDTO.toTag();
-        tag = this.tagRepository.save(tag);
-        ImagesTags imagesTags = tagDTO.getEmptyImagesTags();
-        imagesTags.setImage(this.imageRepository.findOne(tagDTO.getIdImage()));
-        imagesTags.setTag(tag);
+        Tag tag = this.tagRepository.findFirstByText(tagDTO.getText());
+        if(tag == null){
+            tag = this.tagRepository.save(tagDTO.toTag());
+        }
+        ImagesTags imagesTags = new ImagesTags(this.imageRepository.findOne(tagDTO.getIdImage()), tag);
         this.imagesTagsRepository.save(imagesTags);
     }
 

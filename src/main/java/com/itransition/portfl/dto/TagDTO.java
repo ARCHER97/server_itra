@@ -1,7 +1,6 @@
 package com.itransition.portfl.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.itransition.portfl.model.ImagesTags;
 import com.itransition.portfl.model.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +28,4 @@ public class TagDTO {
         return new Tag(this.text);
     }
 
-    public ImagesTags getEmptyImagesTags(){
-        return new ImagesTags();
-    }
 }

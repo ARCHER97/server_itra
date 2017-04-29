@@ -1,5 +1,6 @@
 package com.itransition.portfl.service.impl;
 
+import com.itransition.portfl.dto.ArrayImagesDTO;
 import com.itransition.portfl.dto.ImageDTO;
 import com.itransition.portfl.model.Image;
 import com.itransition.portfl.repository.ImageRepository;
@@ -7,7 +8,6 @@ import com.itransition.portfl.repository.ProfileRepository;
 import com.itransition.portfl.repository.UserRepository;
 import com.itransition.portfl.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -66,5 +66,13 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public void delete(Integer id) {
         this.imageRepository.delete(id);
+    }
+
+    @Override
+    public void saveAll(ArrayImagesDTO arrayImagesDTO) {
+        List<Image> list = arrayImagesDTO.getImages();
+        for (Image image: list) {
+            this.imageRepository.updatePositionOfImage(image.getId(), image.getPosition());
+        }
     }
 }

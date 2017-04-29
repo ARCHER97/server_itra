@@ -1,5 +1,6 @@
 package com.itransition.portfl.service;
 
+import com.itransition.portfl.dto.ArrayImagesDTO;
 import com.itransition.portfl.dto.ImageDTO;
 import com.itransition.portfl.model.Image;
 
@@ -14,4 +15,5 @@ public interface ImageService {
     Integer save(ImageDTO imageDTO);
     Integer saveNext(ImageDTO imageDTO);
     void delete(Integer id);
+    void saveAll(ArrayImagesDTO arrayImagesDTO);
 }

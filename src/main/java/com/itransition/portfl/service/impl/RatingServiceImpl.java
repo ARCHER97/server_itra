@@ -34,7 +34,7 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public void addRating(AddRatingInfoDTO addRatingInfoDTO, UserDetails userDetails) {
         User user = this.userRepository.findByLogin(userDetails.getUsername());
-        Profile profile = this.profileRepository.findByUser(user);
+        Profile profile = this.profileRepository.findById(addRatingInfoDTO.getProfileId());
         UsersProfiles usersProfiles = this.userProfileRepository.findFirstByUserAndProfile(user, profile);
         if(usersProfiles == null){
             this.saveNewRatingRow(user, profile, addRatingInfoDTO);
@@ -50,7 +50,7 @@ public class RatingServiceImpl implements RatingService {
         double rating = profile.getRating();
         int colLike = profile.getColLike();
         rating = (rating*colLike + addRatingInfoDTO.getRating()) / (colLike + 1);
-        this.profileRepository.updateRating(rating, colLike, addRatingInfoDTO.getProfileId());
+        this.profileRepository.updateRating(rating, colLike+1, addRatingInfoDTO.getProfileId());
     }
 
     private void saveRatingRow(UsersProfiles usersProfiles, Profile profile, AddRatingInfoDTO addRatingInfoDTO) {

@@ -44,7 +44,10 @@ public class CommentController {
     @PostMapping(value = "/savenaxt")
     public ResponseEntity<?> saveNext(@RequestBody CommentDTO commentDTO,
                                       @RequestHeader(value="jwt") String token) {
-        UserDetails userDetails = this.jwtTokenHandler.parseUserFromToken(token).get();
+        UserDetails userDetails = null;
+        if(token != "") {
+            userDetails = this.jwtTokenHandler.parseUserFromToken(token).get();
+        }
         this.commentService.saveNext(commentDTO, userDetails);
         return ResponseEntity.ok("ok");
     }

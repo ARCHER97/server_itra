@@ -29,4 +29,9 @@ public class ImagesTags {
     @JoinColumn(name = "id_tag", nullable = false)
     private Tag tag;
 
+    public ImagesTags(Image image, Tag tag) {
+        this.image = image;
+        this.tag = tag;
+    }
+
 }

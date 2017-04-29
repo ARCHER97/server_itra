@@ -2,6 +2,7 @@ package com.itransition.portfl.service;
 
 import com.itransition.portfl.dto.ProfileDTO;
 import com.itransition.portfl.model.Profile;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Kulik Artur
@@ -12,4 +13,5 @@ public interface ProfileService {
     Integer save(ProfileDTO profileDTO);
     void delete(Integer id);
     Integer findRatingByUserId(Integer id);
+    Profile findByUserDetals(UserDetails userDetails);
 }

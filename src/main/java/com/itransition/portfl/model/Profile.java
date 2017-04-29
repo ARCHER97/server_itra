@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @ToString
+//@Indexed
 @Table(name = "profiles")
 public class Profile{
 
@@ -35,6 +36,7 @@ public class Profile{
     @JoinColumn(name = "id_types_of_photography", nullable = false)
     private TypeOfPhotography typeOfPhotography;
 
+    //@Field(name = "name")
     @Column(name = "name")
     private String name;
 
