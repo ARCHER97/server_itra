@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     private RoleRepositiry roleRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UsersRolesRepository usersRolesRepository, RoleRepositiry roleRepository){
+    public UserServiceImpl(UserRepository userRepository, UsersRolesRepository usersRolesRepository, RoleRepositiry roleRepository) {
         this.userRepository = userRepository;
         this.usersRolesRepository = usersRolesRepository;
         this.roleRepository = roleRepository;
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isAdmin(UserDetails userDetails) {
-        if(userDetails != null) {
+        if (userDetails != null) {
             User user = this.userRepository.findByLogin(userDetails.getUsername());
             UsersRoles usersRoles = this.usersRolesRepository.getUsersRolesByUser(user);
             if (usersRoles.getRole().getId() == 2) return true;

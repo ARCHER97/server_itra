@@ -15,7 +15,7 @@ public class TyprOfPhotoImpl implements TypeOfPhotoService {
     private TypeOfPhotographyRepository typeOfPhotographyRepository;
 
     @Autowired
-    public TyprOfPhotoImpl(TypeOfPhotographyRepository typeOfPhotographyRepository){
+    public TyprOfPhotoImpl(TypeOfPhotographyRepository typeOfPhotographyRepository) {
         this.typeOfPhotographyRepository = typeOfPhotographyRepository;
     }
 

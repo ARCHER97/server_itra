@@ -14,12 +14,12 @@ import javax.transaction.Transactional;
  * @author Kulik Artur
  */
 @Repository
-public interface UserProfileRepository extends JpaRepository<UsersProfiles, Integer>{
+public interface UserProfileRepository extends JpaRepository<UsersProfiles, Integer> {
 
-    public UsersProfiles findFirstByUserAndProfile(User user, Profile profile);
+    UsersProfiles findFirstByUserAndProfile(User user, Profile profile);
 
     @Modifying
     @Transactional
     @Query("UPDATE UsersProfiles u SET u.rating = ?2 WHERE u.id = ?1")
-    public void updateRatingById(Integer id, Integer rating);
+    void updateRatingById(Integer id, Integer rating);
 }

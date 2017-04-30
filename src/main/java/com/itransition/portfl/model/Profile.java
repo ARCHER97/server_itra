@@ -16,7 +16,7 @@ import javax.persistence.*;
 @ToString
 //@Indexed
 @Table(name = "profiles")
-public class Profile{
+public class Profile {
 
     @Id
     @Column(name = "id")

@@ -24,5 +24,5 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
     @Modifying
     @Transactional
     @Query("update Profile p set p.rating = ?1, p.colLike = ?2 where p.id = ?3")
-    int  updateRating(Double rating, Integer colLike, Integer idProfile);
+    void updateRating(Double rating, Integer colLike, Integer idProfile);
 }

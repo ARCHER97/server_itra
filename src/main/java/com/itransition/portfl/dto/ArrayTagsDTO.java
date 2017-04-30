@@ -18,7 +18,7 @@ import java.util.List;
 public class ArrayTagsDTO {
     private List<TagDTO> tags;
 
-    public ArrayTagsDTO(@JsonProperty("tags") List<TagDTO> tags){
+    public ArrayTagsDTO(@JsonProperty("tags") List<TagDTO> tags) {
         this.tags = tags;
     }
 

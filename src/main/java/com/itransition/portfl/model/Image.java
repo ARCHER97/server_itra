@@ -33,7 +33,7 @@ public class Image {
     @Column(name = "url")
     private String url;
 
-    public Image(Profile profile, Integer position, String url){
+    public Image(Profile profile, Integer position, String url) {
         this.profile = profile;
         this.position = position;
         this.url = url;

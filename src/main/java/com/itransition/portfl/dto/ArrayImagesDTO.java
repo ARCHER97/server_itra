@@ -20,7 +20,7 @@ public class ArrayImagesDTO {
 
     private List<Image> images;
 
-    public ArrayImagesDTO(@JsonProperty("images") List<Image> images){
+    public ArrayImagesDTO(@JsonProperty("images") List<Image> images) {
         this.images = images;
     }
 

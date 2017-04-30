@@ -28,7 +28,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Autowired
     public ProfileServiceImpl(ProfileRepository profileRepository, UserRepository userRepository,
-                              SexRepository sexRepository, TypeOfPhotographyRepository typeOfPhotographyRepository){
+                              SexRepository sexRepository, TypeOfPhotographyRepository typeOfPhotographyRepository) {
         this.profileRepository = profileRepository;
         this.userRepository = userRepository;
         this.sexRepository = sexRepository;
@@ -68,8 +68,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Profile findByUserDetals(UserDetails userDetails) {
         User user = this.userRepository.findByLogin(userDetails.getUsername());
-        Profile profile = this.profileRepository.findByUser(user);
-        return profile;
+        return this.profileRepository.findByUser(user);
     }
 
 }

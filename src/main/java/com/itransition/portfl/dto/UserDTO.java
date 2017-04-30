@@ -44,12 +44,12 @@ public final class UserDTO {
         return new UsernamePasswordAuthenticationToken(login, password, getAuthorities());
     }
 
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    private Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(() -> ROLE_USER);
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.login + " " + this.password;
     }
 }

@@ -18,7 +18,7 @@ public class AddRatingInfoDTO {
     private Integer profileId;
 
     public AddRatingInfoDTO(@JsonProperty("rating") Integer rating,
-                            @JsonProperty("profileId") Integer profileId){
+                            @JsonProperty("profileId") Integer profileId) {
         this.rating = rating;
         this.profileId = profileId;
     }

@@ -18,19 +18,19 @@ public class LocalizationController {
     private LocalizationInterface enLocalization;
 
     @Autowired
-    public LocalizationController( @Qualifier("localizationRU") LocalizationInterface ruLocalization,
-                                   @Qualifier("localizationEN") LocalizationInterface enLocalization){
+    public LocalizationController(@Qualifier("localizationRU") LocalizationInterface ruLocalization,
+                                  @Qualifier("localizationEN") LocalizationInterface enLocalization) {
         this.ruLocalization = ruLocalization;
         this.enLocalization = enLocalization;
     }
 
     @GetMapping(value = "get")
-    public ResponseEntity<?> getLocal(@RequestParam(value = "name") String name){
+    public ResponseEntity<?> getLocal(@RequestParam(value = "name") String name) {
         return ResponseEntity.ok(this.getConcretLocal(name).getLocal());
     }
 
     private LocalizationInterface getConcretLocal(String name) {
-        if(name.equals("ru")) return this.ruLocalization;
+        if (name.equals("ru")) return this.ruLocalization;
         return this.enLocalization;
     }
 

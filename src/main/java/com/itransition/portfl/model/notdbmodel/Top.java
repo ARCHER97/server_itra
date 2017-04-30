@@ -20,7 +20,7 @@ public class Top {
 
     private String url;
 
-    public Top(Integer id, String name, Double rating, String url){
+    public Top(Integer id, String name, Double rating, String url) {
         this.id = id;
         this.name = name;
         this.rating = rating;

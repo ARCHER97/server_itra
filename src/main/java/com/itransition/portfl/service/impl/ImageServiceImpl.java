@@ -29,7 +29,7 @@ public class ImageServiceImpl implements ImageService {
     @Autowired
     public ImageServiceImpl(ImageRepository imageRepository,
                             ProfileRepository profileRepository,
-                            UserRepository userRepository){
+                            UserRepository userRepository) {
         this.imageRepository = imageRepository;
         this.profileRepository = profileRepository;
         this.userRepository = userRepository;
@@ -54,7 +54,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Integer saveNext(ImageDTO imageDTO){
+    public Integer saveNext(ImageDTO imageDTO) {
         Image image = imageDTO.toImageWithUrl();
         image.setProfile(this.profileRepository.findOne(imageDTO.getIdProfile()));
         Integer nextPosition = this.imageRepository.findImageWhereMaxPosition(imageDTO.getIdProfile()) + 1;
@@ -71,7 +71,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public void saveAll(ArrayImagesDTO arrayImagesDTO) {
         List<Image> list = arrayImagesDTO.getImages();
-        for (Image image: list) {
+        for (Image image : list) {
             this.imageRepository.updatePositionOfImage(image.getId(), image.getPosition());
         }
     }

@@ -6,12 +6,12 @@ import com.itransition.portfl.security.JwtTokenHandler;
 import com.itransition.portfl.service.AuthService;
 import com.itransition.portfl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 /**
  * @author Kulik Artur
@@ -34,29 +34,32 @@ public class UserController {
     }
 
     @PostMapping(value = "singup")
-    public ResponseEntity singup(@RequestBody PersonContext personContext) {
+    public ResponseEntity<?> singup(@RequestBody PersonContext personContext) {
         String res = "";
-        if(this.authService.singup(personContext.getUserDTO(),
+        if (this.authService.singup(personContext.getUserDTO(),
                 personContext.getProfileDTO(), personContext.getImageDTO())) {
             res = this.jwtTokenHandler.createTokenForUser(personContext.getUserDTO().toUser());
         }
 
-        return new ResponseEntity(res, HttpStatus.OK);
+        return ResponseEntity.ok(res);
     }
 
     @PostMapping(value = "login")
     public ResponseEntity login(@Valid @RequestBody UserDTO userDTO) {
         String res = "";
-        if (this.authService.login(userDTO)){
+        if (this.authService.login(userDTO)) {
             res = this.jwtTokenHandler.createTokenForUser(userDTO.toUser());
         }
-        return new ResponseEntity(res, HttpStatus.OK);
+        return ResponseEntity.ok(res);
     }
 
     @GetMapping(value = "isadmin")
     public ResponseEntity<?> isadmin(@RequestHeader(value = "jwt") String jwt) {
         UserDetails userDetails = null;
-        if(jwt != "") userDetails = this.jwtTokenHandler.parseUserFromToken(jwt).get();
+        Optional<UserDetails> userDetailsOptional = this.jwtTokenHandler.parseUserFromToken(jwt);
+        if(userDetailsOptional.isPresent()){
+            userDetails = userDetailsOptional.get();
+        }
         return ResponseEntity.ok(this.userService.isAdmin(userDetails));
     }
 

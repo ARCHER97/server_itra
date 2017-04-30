@@ -11,7 +11,7 @@ public class LocalizationEN implements LocalizationInterface {
 
     private final String ENLOCAL;
 
-    public LocalizationEN(){
+    public LocalizationEN() {
         ENLOCAL = "[ " +
                 "{ \"key\":\"home\",    \"value\":\"Home\"}, " +
                 "{ \"key\":\"search\",  \"value\":\"Search\"}, " +

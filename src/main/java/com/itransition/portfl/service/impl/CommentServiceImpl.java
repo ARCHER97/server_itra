@@ -32,7 +32,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     public CommentServiceImpl(CommentRepository commentRepository, ImageRepository imageRepository,
-                              UserRepository userRepository, ProfileRepository profileRepository){
+                              UserRepository userRepository, ProfileRepository profileRepository) {
         this.commentRepository = commentRepository;
         this.imageRepository = imageRepository;
         this.userRepository = userRepository;
@@ -59,14 +59,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void saveNext(CommentDTO commentDTO, UserDetails userDetails) {
         Comment comment = commentDTO.toCommentWithoutImage();
-        if(userDetails != null) {
+        if (userDetails != null) {
             Profile profile = this.profileRepository
                     .findByUser(this.userRepository.findByLogin(userDetails.getUsername()));
             comment.setTitle(profile.getName());
         } else comment.setTitle("anonimus");
         comment.setImage(this.imageRepository.findOne(commentDTO.getImageId()));
         Integer pizdec = this.commentRepository.findCommentWhereMaxPosition(commentDTO.getImageId());
-        if(pizdec == null) pizdec = 0;
+        if (pizdec == null) pizdec = 0;
         comment.setPosition(pizdec + 1);
 
         this.commentRepository.save(comment);

@@ -11,7 +11,7 @@ public class LocalizationRU implements LocalizationInterface {
 
     private final String RULOCAL;
 
-    public LocalizationRU(){
+    public LocalizationRU() {
         RULOCAL = "[ " +
                 "{ \"key\":\"home\",    \"value\":\"Главная\"}, " +
                 "{ \"key\":\"search\",  \"value\":\"Поиск\"}, " +
