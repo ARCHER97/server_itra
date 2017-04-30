@@ -2,6 +2,7 @@ package com.itransition.portfl.service;
 
 import com.itransition.portfl.dto.UserDTO;
 import com.itransition.portfl.model.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.Optional;
@@ -16,4 +17,5 @@ public interface UserService extends UserDetailsService {
     User save(User user);
     void delete(Integer id);
     User createUser(UserDTO userDTO);
+    boolean isAdmin(UserDetails userDetails);
 }
