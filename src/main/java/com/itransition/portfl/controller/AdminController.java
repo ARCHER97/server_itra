@@ -1,10 +1,14 @@
 package com.itransition.portfl.controller;
 
-import com.itransition.portfl.repository.ProfileRepository;
 import com.itransition.portfl.security.JwtTokenHandler;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.itransition.portfl.service.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * @author Kulik Artur
@@ -14,9 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "admin")
 public class AdminController {
 
-    private ProfileRepository profileRepository;
+    private AdminService adminService;
     private JwtTokenHandler jwtTokenHandler;
 
-//    @GetMapping(value = "getAll")
-//    public
+    @Autowired
+    public AdminController(AdminService adminService, JwtTokenHandler jwtTokenHandler) {
+        this.adminService = adminService;
+        this.jwtTokenHandler = jwtTokenHandler;
+    }
+
+    @GetMapping(value = "getAll")
+    public ResponseEntity<?> getAll(@RequestHeader("jwt") String token){
+        Optional<UserDetails> userDetailsOptional = this.jwtTokenHandler.parseUserFromToken(token);
+        if(userDetailsOptional.isPresent()){
+            return ResponseEntity.ok(this.adminService.getAdminInfoWithCheckAdmin(userDetailsOptional.get()));
+        }
+        return ResponseEntity.ok(new ArrayList<>());
+    }
+
+
 }
