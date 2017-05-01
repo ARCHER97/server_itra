@@ -12,5 +12,9 @@ public interface AdminService {
     List<UserInfoForAdmin> getAdminInfo();
 
     List<UserInfoForAdmin> getAdminInfoWithCheckAdmin(UserDetails userDetails);
+
+    void updateAdminInfo(List<UserInfoForAdmin> list);
+
+    void updateAdminInfoWithCheckAdmin(List<UserInfoForAdmin> list, UserDetails userDetails);
 }
 

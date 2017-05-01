@@ -1,5 +1,6 @@
 package com.itransition.portfl.controller;
 
+import com.itransition.portfl.dto.ArrayUserInfoForAdminDTO;
 import com.itransition.portfl.security.JwtTokenHandler;
 import com.itransition.portfl.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,13 @@ public class AdminController {
         return ResponseEntity.ok(new ArrayList<>());
     }
 
+    @PostMapping(value = "saveRoles")
+    public ResponseEntity<?> saveRoles(@RequestHeader("jwt") String token,
+                                       @RequestBody ArrayUserInfoForAdminDTO array){
+        Optional<UserDetails> userDetailsOptional = this.jwtTokenHandler.parseUserFromToken(token);
+        userDetailsOptional.ifPresent(userDetails ->
+            this.adminService.updateAdminInfoWithCheckAdmin(array.getUserInfoForAdminArrayList(), userDetails));
+        return ResponseEntity.ok("ok");
+    }
 
 }
