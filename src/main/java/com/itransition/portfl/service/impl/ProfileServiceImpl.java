@@ -2,6 +2,8 @@ package com.itransition.portfl.service.impl;
 
 import com.itransition.portfl.dto.ProfileDTO;
 import com.itransition.portfl.model.Profile;
+import com.itransition.portfl.model.Sex;
+import com.itransition.portfl.model.TypeOfPhotography;
 import com.itransition.portfl.model.User;
 import com.itransition.portfl.repository.ProfileRepository;
 import com.itransition.portfl.repository.SexRepository;
@@ -53,6 +55,16 @@ public class ProfileServiceImpl implements ProfileService {
         profile.setTypeOfPhotography(this.typeOfPhotographyRepository.findOne(profileDTO.getIdTypeOfPhotography()));
         this.profileRepository.save(profile);
         return this.profileRepository.findByUserId(profile.getUser().getId()).getId();
+    }
+
+    @Override
+    public void update(ProfileDTO profileDTO, UserDetails userDetails) {
+        User user = this.userRepository.findByLogin(userDetails.getUsername());
+        Profile profile = this.profileRepository.findByUser(user);
+        Sex sex = this.sexRepository.findOne(profileDTO.getIdSex());
+        TypeOfPhotography typeOfPhotography = this.typeOfPhotographyRepository.findOne(profileDTO.getIdTypeOfPhotography());
+        this.profileRepository.update(profile.getId(), sex, typeOfPhotography, profileDTO.getName(),
+                profileDTO.getYearOfBirth(), profileDTO.getHeight(), profileDTO.getWeight());
     }
 
     @Override

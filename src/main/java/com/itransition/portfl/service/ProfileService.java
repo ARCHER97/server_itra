@@ -14,6 +14,8 @@ public interface ProfileService {
 
     Integer save(ProfileDTO profileDTO);
 
+    void update(ProfileDTO profileDTO, UserDetails userDetails);
+
     void delete(Integer id);
 
     Integer findRatingByUserId(Integer id);

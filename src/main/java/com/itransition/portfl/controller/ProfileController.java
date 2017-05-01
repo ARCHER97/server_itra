@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/profiles")
@@ -46,6 +48,14 @@ public class ProfileController {
     public ResponseEntity<?> getMyProfileId(@RequestHeader(value = "jwt") String jwt) {
         UserDetails userDetails = this.jwtTokenHandler.parseUserFromToken(jwt).get();
         return ResponseEntity.ok(this.profileService.findByUserDetals(userDetails).getId());
+    }
+
+    @PostMapping(value = "update")
+    public ResponseEntity<?> updateProfile(@RequestHeader(value = "jwt") String jwt,
+                                           @RequestBody ProfileDTO profileDTO){
+        Optional<UserDetails> userDetailsOptional = this.jwtTokenHandler.parseUserFromToken(jwt);
+        userDetailsOptional.ifPresent(userDetails -> this.profileService.update(profileDTO, userDetails));
+        return ResponseEntity.ok("ok");
     }
 
 }
